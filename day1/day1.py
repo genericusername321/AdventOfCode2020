@@ -11,7 +11,7 @@ def sum2(nums, target):
                 print(a*b)
 
 def sum3(nums, target):
-    # Solution to aprt 2
+    # Solution to part 2
     N = len(nums)
     for i in range(N):
         for j in range(i+1, N):
