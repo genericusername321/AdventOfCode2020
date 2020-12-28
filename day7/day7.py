@@ -88,7 +88,6 @@ def countContainedBags(rules, bagtype):
     for bagtype in contained:
         total += contained[bagtype]
 
-    print(contained)
     return total-1
             
 
@@ -100,6 +99,6 @@ if __name__ == "__main__":
     # is a list of tuples denoting the number and types the key contains.
     rules = parseInput("day7.in")
 
-    print(countContainingBags(rules, 'shiny gold'))
+    print("part1: ", countContainingBags(rules, 'shiny gold'))
 
-    print(countContainedBags(rules, 'shiny gold'))
+    print("part2: ", countContainedBags(rules, 'shiny gold'))
