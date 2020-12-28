@@ -3,7 +3,8 @@ def fix(programme):
     Note that the nops and jumps that we need to fix must be one
     that is visited in the erroneous execution.
         1. Find all nops and jumps along the executed lines
-        2. Change nops and jumps sequentially to see if programme terminates
+        2. Do brute force search on all nops and jumps to see if programme
+           terminates correctly.
     """
     nops, jumps = findNopsAndJumps(programme)
     n = len(programme)
@@ -23,6 +24,10 @@ def fix(programme):
         programme[jmp][0] = 'jmp'
 
 def findNopsAndJumps(programme):
+    """
+    Find all visited nop and jump commands
+    """
+
     nops = []
     jumps = []
     
@@ -31,7 +36,7 @@ def findNopsAndJumps(programme):
     n = len(programme)
 
 
-    while pointer < n and pointer >= 0:
+    while pointer < n and pointer >= 0 and pointer not in visited:
         ins, arg = programme[pointer]
         visited.append(pointer)
         if ins == 'nop':
@@ -46,11 +51,6 @@ def findNopsAndJumps(programme):
             jumps.append(pointer)
             pointer += arg
 
-        if pointer in visited:
-            # if the next line is already visited, we have gone wrong. 
-            # backtrack to the most recent 
-            break
-
     return (nops, jumps)
 
 def run(programme):
@@ -64,7 +64,7 @@ def run(programme):
     pointer = 0           # current line
     size = len(programme)
     visited = []        # visited lines
-    while pointer < size and pointer >= 0:
+    while pointer < size and pointer >= 0 and pointer not in visited:
         ins, arg = programme[pointer]
 
         visited.append(pointer)
@@ -78,9 +78,6 @@ def run(programme):
         elif ins == 'jmp':
             # Jump to new instruction at distance arg from current line
             pointer += arg
-
-        if pointer in visited:
-            break
 
     return (accumulator, pointer)
 
