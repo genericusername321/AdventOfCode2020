@@ -35,8 +35,6 @@ def applyMask1(value, mask, location, memory):
 
     memory[location] = bin2num(bitarray)
 
-        
-
 def applyMask2(location, mask):
     # Apply mask to location
     bitarray = num2bin(location)
